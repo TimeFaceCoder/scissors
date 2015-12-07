@@ -238,7 +238,6 @@ public class CropView extends ImageView {
          * Load a {@link Bitmap} using an automatically resolved {@link BitmapLoader} which will attempt to scale image to fill view.
          *
          * @param model Model used by {@link BitmapLoader} to load desired {@link Bitmap}
-         * @see PicassoBitmapLoader
          * @see GlideBitmapLoader
          */
         public void load(@Nullable Object model) {
@@ -250,7 +249,6 @@ public class CropView extends ImageView {
          * Load a {@link Bitmap} using given {@link BitmapLoader}, you must call {@link LoadRequest#load(Object)} afterwards.
          *
          * @param bitmapLoader {@link BitmapLoader} used to load desired {@link Bitmap}
-         * @see PicassoBitmapLoader
          * @see GlideBitmapLoader
          */
         public LoadRequest using(@Nullable BitmapLoader bitmapLoader) {

@@ -22,6 +22,7 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.ViewTreeObserver;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.util.concurrent.Future;
@@ -150,7 +151,7 @@ class CropViewExtensions {
         /**
          * Asynchronously flush cropped bitmap into provided stream.
          *
-         * @param outputStream Stream to write to
+         * @param outputStream  Stream to write to
          * @param closeWhenDone wetter or not to close provided stream once flushing is done
          * @return {@link Future} used to cancel or wait for this request.
          */
@@ -160,30 +161,9 @@ class CropViewExtensions {
         }
     }
 
-    final static boolean HAS_PICASSO = canHasClass("com.squareup.picasso.Picasso");
-    final static boolean HAS_GLIDE = canHasClass("com.bumptech.glide.Glide");
-    final static boolean HAS_UIL = canHasClass("com.nostra13.universalimageloader.core.ImageLoader");
-
     static BitmapLoader resolveBitmapLoader(CropView cropView) {
-        if (HAS_PICASSO) {
-            return PicassoBitmapLoader.createUsing(cropView);
-        }
-        if (HAS_GLIDE) {
-            return GlideBitmapLoader.createUsing(cropView);
-        }
-        if (HAS_UIL) {
-            return UILBitmapLoader.createUsing(cropView);
-        }
-        throw new IllegalStateException("You must provide a BitmapLoader.");
-    }
+        return GlideBitmapLoader.createUsing(cropView);
 
-    static boolean canHasClass(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-        }
-        return false;
     }
 
     static Rect computeTargetSize(int sourceWidth, int sourceHeight, int viewportWidth, int viewportHeight) {

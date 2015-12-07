@@ -20,6 +20,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -57,9 +58,9 @@ class Utils {
     private static final String TAG = "scissors.Utils";
 
     public static Future<Void> flushToFile(final Bitmap bitmap,
-            final Bitmap.CompressFormat format,
-            final int quality,
-            final File file) {
+                                           final Bitmap.CompressFormat format,
+                                           final int quality,
+                                           final File file) {
 
         return EXECUTOR_SERVICE.submit(new Runnable() {
             @Override
@@ -81,10 +82,10 @@ class Utils {
     }
 
     public static Future<Void> flushToStream(final Bitmap bitmap,
-            final Bitmap.CompressFormat format,
-            final int quality,
-            final OutputStream outputStream,
-            final boolean closeWhenDone) {
+                                             final Bitmap.CompressFormat format,
+                                             final int quality,
+                                             final OutputStream outputStream,
+                                             final boolean closeWhenDone) {
 
         return EXECUTOR_SERVICE.submit(new Runnable() {
             @Override

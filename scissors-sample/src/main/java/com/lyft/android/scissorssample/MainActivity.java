@@ -22,14 +22,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.lyft.android.scissors.CropView;
+
+import java.io.File;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
-import com.lyft.android.scissors.CropView;
-import com.squareup.leakcanary.RefWatcher;
-import java.io.File;
-import java.util.List;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -43,7 +45,7 @@ public class MainActivity extends Activity {
     @Bind(R.id.crop_view)
     CropView cropView;
 
-    @Bind({ R.id.crop_fab, R.id.pick_mini_fab })
+    @Bind({R.id.crop_fab, R.id.pick_mini_fab})
     List<View> buttons;
 
     @Bind(R.id.pick_fab)
@@ -97,7 +99,7 @@ public class MainActivity extends Activity {
                 }));
     }
 
-    @OnClick({ R.id.pick_fab, R.id.pick_mini_fab })
+    @OnClick({R.id.pick_fab, R.id.pick_mini_fab})
     public void onPickClicked() {
         cropView.extensions()
                 .pickUsing(this, RequestCodes.PICK_IMAGE_FROM_GALLERY);
@@ -108,10 +110,6 @@ public class MainActivity extends Activity {
         super.onDestroy();
 
         subscriptions.unsubscribe();
-
-        RefWatcher refWatcher = App.getRefWatcher(this);
-        refWatcher.watch(this, "MainActivity");
-        refWatcher.watch(cropView, "cropView");
     }
 
     @OnTouch(R.id.crop_view)
