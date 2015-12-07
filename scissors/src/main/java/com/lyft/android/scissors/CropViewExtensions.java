@@ -173,7 +173,9 @@ class CropViewExtensions {
         }
 
         float scale;
-        if (sourceWidth * viewportHeight > viewportWidth * sourceHeight) {
+        if (sourceWidth < viewportHeight && sourceHeight < viewportHeight) {
+            scale = 1;
+        } else if (sourceWidth * viewportHeight > viewportWidth * sourceHeight) {
             scale = (float) viewportHeight / (float) sourceHeight;
         } else {
             scale = (float) viewportWidth / (float) sourceWidth;

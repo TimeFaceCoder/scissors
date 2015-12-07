@@ -22,7 +22,6 @@ import android.widget.ImageView;
 /**
  * Load extension delegates actual Bitmap loading to a BitmapLoader allowing it to use different implementations.
  *
- * @see PicassoBitmapLoader
  * @see GlideBitmapLoader
  */
 public interface BitmapLoader {
