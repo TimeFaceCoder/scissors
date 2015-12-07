@@ -88,8 +88,8 @@ class TouchManager {
         this.bitmapWidth = bitmapWidth;
         this.bitmapHeight = bitmapHeight;
 
-        horizontalLimit = computeLimit(bitmapWidth, viewportWidth);
-        verticalLimit = computeLimit(bitmapHeight, viewportHeight);
+        horizontalLimit = availableWidth;
+        verticalLimit = availableHeight;
     }
 
     public int getViewportWidth() {
@@ -112,8 +112,6 @@ class TouchManager {
             return;
         }
         updateScale();
-        horizontalLimit = computeLimit((int) (bitmapWidth * scale), viewportWidth);
-        verticalLimit = computeLimit((int) (bitmapHeight * scale), viewportHeight);
     }
 
     @TargetApi(Build.VERSION_CODES.FROYO)
