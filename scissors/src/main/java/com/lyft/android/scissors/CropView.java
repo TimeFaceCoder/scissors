@@ -168,20 +168,13 @@ public class CropView extends ImageView {
         if (bitmap == null) {
             return null;
         }
-
         final Bitmap src = bitmap;
         final Bitmap.Config srcConfig = src.getConfig();
         final Bitmap.Config config = srcConfig == null ? Bitmap.Config.ARGB_8888 : srcConfig;
-        final int viewportHeight = touchManager.getViewportHeight();
-        final int viewportWidth = touchManager.getViewportWidth();
-
-        final Bitmap dst = Bitmap.createBitmap(viewportWidth, viewportHeight, config);
-
+        final Bitmap dst = Bitmap.createBitmap(getWidth(), getHeight(), config);
         Canvas canvas = new Canvas(dst);
         canvas.drawColor(Color.WHITE);
-
         drawBitmap(canvas);
-
         return dst;
     }
 
