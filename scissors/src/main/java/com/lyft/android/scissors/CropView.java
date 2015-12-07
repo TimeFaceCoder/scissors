@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
@@ -32,8 +33,10 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+
 import com.lyft.android.scissors.CropViewExtensions.CropRequest;
 import com.lyft.android.scissors.CropViewExtensions.LoadRequest;
+
 import java.io.File;
 import java.io.OutputStream;
 
@@ -79,15 +82,7 @@ public class CropView extends ImageView {
         if (bitmap == null) {
             return;
         }
-
         drawBitmap(canvas);
-
-        final int bottom = getBottom();
-        final int viewportWidth = touchManager.getViewportWidth();
-        final int viewportHeight = touchManager.getViewportHeight();
-        final int remainingHalf = (bottom - viewportHeight) / 2;
-        canvas.drawRect(0, 0, viewportWidth, remainingHalf, viewportPaint);
-        canvas.drawRect(0, bottom - remainingHalf, viewportWidth, bottom, viewportPaint);
     }
 
     private void drawBitmap(Canvas canvas) {
@@ -183,8 +178,7 @@ public class CropView extends ImageView {
         final Bitmap dst = Bitmap.createBitmap(viewportWidth, viewportHeight, config);
 
         Canvas canvas = new Canvas(dst);
-        final int remainingHalf = (getBottom() - viewportHeight) / 2;
-        canvas.translate(0, -remainingHalf);
+        canvas.drawColor(Color.WHITE);
 
         drawBitmap(canvas);
 
