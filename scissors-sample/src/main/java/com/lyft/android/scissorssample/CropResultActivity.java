@@ -48,21 +48,8 @@ public class CropResultActivity extends Activity {
         Glide.with(this)
                 .load(imageFile)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(resultView);
-
-        // Or Glide
-        //Glide.with(this)
-        //        .load(imageFile)
-        //        .diskCacheStrategy(DiskCacheStrategy.NONE)
-        //        .skipMemoryCache(true)
-        //        .into(resultView);
-
-        // Or Android-Universal-Image-Loader
-        //DisplayImageOptions options = new DisplayImageOptions.Builder()
-        //        .cacheInMemory(false)
-        //        .cacheOnDisk(false)
-        //        .build();
-        //ImageLoader.getInstance().displayImage("file://" + filePath, resultView, options);
     }
 
     static void startUsing(File croppedPath, Activity activity) {

@@ -161,9 +161,26 @@ class CropViewExtensions {
         }
     }
 
-    static BitmapLoader resolveBitmapLoader(CropView cropView) {
-        return GlideBitmapLoader.createUsing(cropView);
+    final static boolean HAS_PICASSO = canHasClass("com.squareup.picasso.Picasso");
+    final static boolean HAS_GLIDE = canHasClass("com.bumptech.glide.Glide");
 
+    static BitmapLoader resolveBitmapLoader(CropView cropView) {
+        if (HAS_PICASSO) {
+            return PicassoBitmapLoader.createUsing(cropView);
+        }
+        if (HAS_GLIDE) {
+            return GlideBitmapLoader.createUsing(cropView);
+        }
+        throw new IllegalStateException("You must provide a BitmapLoader.");
+    }
+
+    static boolean canHasClass(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+        }
+        return false;
     }
 
     static Rect computeTargetSize(int sourceWidth, int sourceHeight, int viewportWidth, int viewportHeight) {
@@ -173,9 +190,7 @@ class CropViewExtensions {
         }
 
         float scale;
-        if (sourceWidth < viewportHeight && sourceHeight < viewportHeight) {
-            scale = 1;
-        } else if (sourceWidth * viewportHeight > viewportWidth * sourceHeight) {
+        if (sourceWidth * viewportHeight > viewportWidth * sourceHeight) {
             scale = (float) viewportHeight / (float) sourceHeight;
         } else {
             scale = (float) viewportWidth / (float) sourceWidth;
